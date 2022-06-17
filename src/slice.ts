@@ -13,7 +13,8 @@ const initialState = {
     categories: categoryList,
     totalPages: 0,
     currentPage: 1,
-    pageSize: 4
+    pageSize: 4,
+    isLoading: false
 }
 
 const appSlice: any = createSlice({
@@ -25,6 +26,8 @@ const appSlice: any = createSlice({
         setPageSize: (state, action): any => { return { ...state, pageSize: action.payload } },
         setCurrentPage: (state, action): any => { return { ...state, currentPage: action.payload } },
         updateCategoryList: (state, action) => { return { ...state, categories: [...action.payload] } },
+        updateIsLoading: (state, action) => { return { ...state, isLoading: action.payload } },
+        getMenuList: (state, action) => { return { ...state } }
     }
 })
 
@@ -33,7 +36,9 @@ export const {
     setTotalPages,
     setPageSize,
     setCurrentPage,
-    updateCategoryList
+    updateIsLoading,
+    updateCategoryList,
+    getMenuList
 } = appSlice.actions;
 
 export default appSlice.reducer;

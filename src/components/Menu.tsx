@@ -1,30 +1,29 @@
 import React from "react";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { setMenuList, setTotalPages } from "../slice";
-import { getFromStore, getMenuList } from '../utility';
+import { getMenuList } from "../slice";
+import { getFromStore } from '../utility';
 import { MenuModel } from '../models/menu';
 import Pager from "./Pager";
 
 
-const Menu = () => {
+const Menu = (props : any) => {
     const menuList: MenuModel[] = useAppSelector(store => getFromStore(store, "menu"));
     const pageSize: number = useAppSelector(store => getFromStore(store, "pageSize"));
     const currentPage: number = useAppSelector(store => getFromStore(store, "currentPage"));
     const categories = useAppSelector(store => getFromStore(store, "categories"));
+    const isLoading = useAppSelector(store => getFromStore(store, "isLoading"));
 
     const index = (currentPage - 1) * pageSize;
     const filetredList = menuList.slice(index, index + pageSize);
     const dispatch = useAppDispatch();
     useEffect(() => {
-        getMenuList(categories).then((data) => {
-            dispatch(setMenuList(data));
-            dispatch(setTotalPages(Math.ceil(data.length / pageSize)));
-        })
+        dispatch(getMenuList({searchText : props.searchText}))
+
     }, [categories]);
 
     return (
-        <div> {filetredList.map((m: MenuModel) => {
+        <div className={isLoading ? "loader" : ""}> {filetredList.map((m: MenuModel) => {
             return (
                 <div key={m.id} className="card m-1 p-1 bg-light">
                     <h4>

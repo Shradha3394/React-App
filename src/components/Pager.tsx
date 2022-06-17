@@ -8,7 +8,7 @@ const Pager = (props: any) => {
     const currentPage = useAppSelector(store => getFromStore(store, "currentPage"));
     const totalPages = useAppSelector(store => getFromStore(store, "totalPages"));
     const dispatch = useAppDispatch();
-    
+
     const updatePageSize = (e: any) => {
         var newPageSize = +e.target.value;
         var totalRecords = props.totalData;

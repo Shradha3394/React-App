@@ -8,8 +8,9 @@ const Category = () => {
 
     const categories: CategoryModel[] = useAppSelector(store => getFromStore(store, "categories"));
     const dispath = useAppDispatch();
+    const isLoading = useAppSelector(store => getFromStore(store, "isLoading"));
+
     const updateCategorySelection = (id: number) => {
-        debugger
         var updatedCategories = categories.map(c => {
             var category = { ...c };
             category.isSelected = category.id == id;
@@ -19,7 +20,7 @@ const Category = () => {
     }
 
     return (
-        <div className="container-fluid">
+        <div className={isLoading ? "loader container-fluid" : "container-fluid"} >
             {categories.map((c: CategoryModel) => {
                 return (
                     <div key={c.name} className="row my-2" >
