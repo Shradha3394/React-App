@@ -1,6 +1,6 @@
 import { takeLatest, put, select, call } from "@redux-saga/core/effects";
 import { CategoryModel } from "../models/Category";
-import { MenuModel } from "../models/menu";
+import { MenuModel } from "../models/Menu";
 import { getMenuList, setCurrentPage, setMenuList, setTotalPages, updateIsLoading } from "../slice";
 import { getFromStore, getMenuListFromAPi } from "../utility";
 

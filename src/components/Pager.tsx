@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { setCurrentPage, setPageSize, setTotalPages } from "../slice";
 import { getFromStore } from "../utility";
 
-const Pager = (props: any) => {
+const Pager = ({totalData } : {totalData : number}) => {
 
     const currentPage = useAppSelector(store => getFromStore(store, "currentPage"));
     const totalPages = useAppSelector(store => getFromStore(store, "totalPages"));
@@ -11,7 +11,7 @@ const Pager = (props: any) => {
 
     const updatePageSize = (e: any) => {
         var newPageSize = +e.target.value;
-        var totalRecords = props.totalData;
+        var totalRecords = totalData;
         dispatch(setPageSize(newPageSize));
         dispatch(setTotalPages(Math.ceil(totalRecords / newPageSize)));
     }

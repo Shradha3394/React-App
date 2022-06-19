@@ -28,4 +28,4 @@ export const getCategoryList = () => {
 
 // }
 
-export const getFromStore = (store: any, key: any) => store.AppReducer[key];
+export const getFromStore = (store: any, key: string) => store.AppReducer[key];
